@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps</title>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD1qM67LtjsTauU9GN2ATfHgNKIPuI8HY&callback=initMap"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+    <script>
+        var map;
+        var marker = null; // To store the current marker
+        var locations = {
+            "673 Ayres Ave": {lat: 21.4984, lng: -158.0586},
+            "694 McCornack Rd": {lat: 21.4938, lng: -158.0601},
+            "1470 Foote Ave": {lat: 21.4906, lng: -158.0541},
+            "361 Waianae Ave": {lat: 21.4911, lng: -158.0516},
+            "560 Kolekole Ave": {lat: 21.4908, lng: -158.0515},
+            "683 Waianae Ave": {lat: 21.4958, lng: -158.0574},
+            "2091 Kolekole Ave": {lat: 21.4894, lng: -158.0589},
+            "698 Trimble Rd": {lat: 21.4922, lng: -158.0571},
+            "1316 Lyman Rd": {lat: 21.4837, lng: -158.0522},
+            "540 Humphreys Rd": {lat: 21.4875, lng: -158.0566},
+            "1020 Menoher Rd": {lat:21.4973, lng: -158.0682}
+            // List of locations
+        };
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 21.4984, lng: -158.0586}, // Default to Schofield Barracks, Hawaii
+                zoom: 13,
+            });
+        }
+
+        function showLocation(locationName) {
+            var location = locations[locationName];
+            if (location) {
+                if (marker) {
+                    // Remove the previous marker when user clicks on a link
+                    marker.setMap(null);
+                }
+                map.setCenter(location);
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: locationName
+                });
+            }
+        }
+    </script>
+    <!-- links to create a pin for different locations -->
+    <ul>
+        <li><a href="javascript:showLocation('673 Ayres Ave')">Soldier Support Center</a></li>
+        <li><a href="javascript:showLocation('694 McCornack Rd')">Post Exchange</a></li>
+        <li><a href="javascript:showLocation('1470 Foote Ave')">Tropics Recreation Center</a></li>
+        <li><a href="javascript:showLocation('361 Waianae Ave')">Tropic Lightning Museum</a></li>
+        <li><a href="javascript:showLocation('560 Kolekole Ave')">Inspector General Office</a></li>
+        <li><a href="javascript:showLocation('683 Waianae Ave')">Desmond Doss Health Clinic</a></li>
+        <li><a href="javascript:showLocation('2091 Kolekole Ave')">25ID Headquarters</a></li>
+        <li><a href="javascript:showLocation('698 Trimble Rd')">Schofield Barracks Commissary</a></li>
+        <li><a href="javascript:showLocation('1316 Lyman Rd')">Provost Marshal Office</a></li>
+        <li><a href="javascript:showLocation('540 Humphreys Rd')">Central Issue Facility</a></li>
+        <li><a href="javascript:showLocation('1020 Menoher Rd')">Reception Company</a></li>
+    </ul>
+</body>
+</html>
